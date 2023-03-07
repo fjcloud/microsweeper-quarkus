@@ -28,4 +28,5 @@ $ oc create sa microsweeper
 $ oc adm policy add-scc-to-user anyuid -z microsweeper
 $ oc create is microsweeper-quarkus
 $ oc apply -f deploy/pipeline.yml
+$ tkn pipeline start microsweeper --workspace name=main,volumeClaimTemplateFile=deploy/pipeline/claim-template.yml --use-param-defaults
 ```

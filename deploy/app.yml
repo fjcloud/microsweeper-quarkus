@@ -20,6 +20,10 @@ spec:
           ports:
             - containerPort: 8080
               protocol: TCP
+          env:
+            - name: QUARKUS_DATASOURCE_JDBC_URL
+              value: >-
+                jdbc:postgresql://postgresql/microsweeper?user=microsweeper&password=microsweeper
   strategy:
     type: RollingUpdate
     rollingUpdate:

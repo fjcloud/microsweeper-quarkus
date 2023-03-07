@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: demo-rosa
+  name: 'microsweeper'
+spec:
+  selector:
+    matchLabels:
+      app: microsweeper
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: microsweeper
+    spec:
+      containers:
+        - name: app
+          image: >-
+            image-registry.openshift-image-registry.svc:5000/demo-rosa/microsweeper-quarkus
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: microsweeper
+  namespace: demo-rosa
+spec:
+  selector:
+    app: microsweeper
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+---
+
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: microsweeper
+spec:
+  to:
+    kind: Service
+    name: microsweeper
+    weight: 100
+  port:
+    targetPort: 8080
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+  wildcardPolicy: None

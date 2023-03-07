@@ -32,14 +32,14 @@ spec:
 
 ---
 
-kind: Service
 apiVersion: v1
+kind: Service
 metadata:
   name: postgresql
 spec:
-  ports:
-    - protocol: TCP
-      port: 5402
-      targetPort: 5402
   selector:
     app: postgresql
+  ports:
+    - protocol: TCP
+      port: 5432
+      targetPort: 5432

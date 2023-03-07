@@ -25,7 +25,7 @@ $ oc expose service/microsweeper-quarkus
 ```
 $ oc new-project microsweeper-pipeline
 $ oc create sa microsweeper
-$ oc create is microsweeper-quarkus
 $ oc adm policy add-scc-to-user anyuid -z microsweeper
+$ oc create is microsweeper-quarkus
 $ oc apply -f deploy/pipeline.yml
 ```

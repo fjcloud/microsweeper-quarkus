@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: 'microsweeper'
+  name: microsweeper
 spec:
   selector:
     matchLabels:
@@ -12,6 +12,7 @@ spec:
       labels:
         app: microsweeper
     spec:
+      serviceAccountName: microsweeper
       containers:
         - name: app
           image: >-

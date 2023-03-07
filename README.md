@@ -11,10 +11,19 @@ Technologies include:
 * Backend based on [Quarkus](https://quarkus.io) to persist scoreboard and provide a reactive frontend and backend connected to [Postgres](https://azure.microsoft.com/en-us/services/postgresql/).
 
 -----------
+# Deploy on OpenShift with Buildconfig
 ```
-# run quarkus in dev mode (it will automatically use Quarkus' dev services to create a DB)
-$ mvn quarkus:dev
-
-# access at http://localhost:8080
+$ oc new-project microsweeper-buildconfig
+$ oc adm policy add-scc-to-user anyuid -z default
+$ oc new-app  -e POSTGRESQL_USER=microsweeper -e POSTGRESQL_PASSWORD=password1 -e POSTGRESQL_DATABASE=microsweeper postgresql:13-el7
+$ oc new-app https://github.com/redhat-mw-demos/microsweeper-quarkus -e 'QUARKUS_DATASOURCE_JDBC_URL=jdbc:postgresql://postgresql/microsweeper?user=microsweeper&password=password1'
+$ oc expose service/microsweeper-quarkus
+```
+# Deploy with OpenShift Pipeline
+```
+$ oc new-project microsweeper-pipeline
+$ oc create sa microsweeper
+$ oc adm policy add-scc-to-user anyuid -z microsweeper
+$ oc apply -f deploy/pipeline.yml
 ```
 

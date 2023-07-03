@@ -25,9 +25,6 @@ spec:
           value: 'true'
         - name: verbose
           value: 'true'
-        - name: gitInitImage
-          value: >-
-            registry.redhat.io/openshift-pipelines/pipelines-git-init-rhel8@sha256:6c3980b3d28c8fb92b17466f5654d5f484ab893f1673ec8f29e49c0d03f8aca9
         - name: userHome
           value: /tekton/home
       taskRef:
@@ -68,9 +65,6 @@ spec:
         - name: IMAGE
           value: >-
             image-registry.openshift-image-registry.svc:5000/$(context.pipelineRun.namespace)/microsweeper-quarkus:$(tasks.git-clone.results.commit)
-        - name: BUILDER_IMAGE
-          value: >-
-            registry.redhat.io/rhel8/buildah@sha256:ac0b8714cc260c94435cab46fe41b3de0ccbc3d93e38c395fa9d52ac49e521fe
         - name: STORAGE_DRIVER
           value: vfs
         - name: DOCKERFILE

@@ -14,7 +14,7 @@ ARG RUN_JAVA_VERSION=1.3.8
 ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en'
 # Install java, maven, and the run-java script
 # Also set up permissions for user `1001`
-RUN microdnf install ca-certificates ${JAVA_PACKAGE} \
+RUN microdnf install -y ca-certificates ${JAVA_PACKAGE} \
     && microdnf update \
     && microdnf clean all \
     && mkdir /deployments \

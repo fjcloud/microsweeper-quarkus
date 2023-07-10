@@ -23,10 +23,10 @@ $ oc expose service/microsweeper-quarkus
 ```
 ## Pipeline Operator
 ```
-$ oc new-project microsweeper-pipeline
-$ oc create sa microsweeper
-$ oc adm policy add-scc-to-user anyuid -z microsweeper
-$ oc create is microsweeper-quarkus
-$ oc apply -f deploy/pipeline/pipeline.yml
-$ tkn pipeline start microsweeper --workspace name=main,volumeClaimTemplateFile=deploy/pipeline/claim-template.yml --use-param-defaults
+oc new-project microsweeper-pipeline
+oc create sa microsweeper
+oc adm policy add-scc-to-user anyuid -z microsweeper
+oc create is microsweeper-quarkus
+oc apply -f deploy/pipeline/pipeline.yml
+tkn pipeline start microsweeper --workspace name=main,volumeClaimTemplateFile=deploy/pipeline/claim-template.yml --use-param-defaults
 ```
